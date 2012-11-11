@@ -57,7 +57,11 @@ public:
         }
 
         InstanceScript* pInstance;
-
+        
+        //Timer Registration
+        uint32 uiChemicalBombTimer;
+        uint32 uiPoisonSoakedShellTimer;
+        
         void Reset()
         {
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
@@ -96,6 +100,11 @@ public:
         }
 
         InstanceScript* pInstance;
+        
+        //Timer Registration
+        uint32 uiAcquiringTargetTimer;
+        uint32 uiBarrierTimer;
+        uint32 uiFlamethrowerTimer;
 
         void Reset()
         {
@@ -138,6 +147,7 @@ public:
 
         InstanceScript* pInstance;
 
+        //Timer Registration
         uint32 uiArcaneAnnihilatorTimer;
 
         void Reset()
@@ -204,7 +214,11 @@ public:
         }
 
         InstanceScript* pInstance;
+        
+        //Timer Registration
         uint32 uiElectricalDischargeTimer;
+        uint32 uiLightningConductorTimer;
+        uint32 uiUnstableShieldTimer;
 
         void Reset()
         {
@@ -213,7 +227,6 @@ public:
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
             
-            //Timer Definitions
             uiElectricalDischargeTimer = 12*IN_MILLISECONDS;
         }
 
