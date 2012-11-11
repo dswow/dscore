@@ -24,7 +24,19 @@
 
 enum eSpell
 {
-    SPELL_ARCANE_ANNIHILATOR = 79710
+    SPELL_ARCANE_ANNIHILATOR            = 79710,
+    SPELL_CHEMICAL_BOMB                 = 80157,
+    SPELL_POISON_SOAKED_SHELL           = 79835,
+    SPELL_GOLEM_INACTIVE                = 78726,
+    SPELL_ELECTRICAL_DISCHARGE          = 79879,
+    SPELL_LIGHTNING_CONDUCTOR           = 79888,
+    SPELL_UNSTABLE_SHIELD               = 79900,
+    SPELL_SHUTTING_DOWN                 = 78746,
+    SPELL_ACQUIRING_TARGET              = 79501,
+    SPELL_BARRIER                       = 79582,
+    SPELL_FLAMETHROWER                  = 79505,
+    SPELL_INCINERATION_SECURITY_MEASURE = 79023,
+    SPELL_POWER_GENERATOR               = 79624
 };
 
 class boss_toxitron : public CreatureScript
