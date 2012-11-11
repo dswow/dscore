@@ -1,1 +1,0 @@
-ALTER TABLE `creature_text` CHANGE content_default text LONGTEXT;
