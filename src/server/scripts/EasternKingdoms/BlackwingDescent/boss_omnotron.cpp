@@ -66,6 +66,8 @@ public:
         {
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
+            
+            uiChemicalBombTimer = 20*IN_MILLISECONDS; //Timer richtig?
         }
 
         void EnterCombat(Unit* /*pWho*/) {}
@@ -76,6 +78,14 @@ public:
         {
             if (!UpdateVictim())
                 return;
+            
+            if (uiChemicalBombTimer <= Diff)
+            {
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 150, true))
+                    me->CastSpell(target, SPELL_CHEMICAL_BOMB, true);
+
+                uiChemicalBombTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS); //Timer richtig?
+            } else uiChemicalBombTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
