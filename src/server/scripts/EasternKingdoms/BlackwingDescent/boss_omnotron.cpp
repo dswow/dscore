@@ -178,7 +178,7 @@ public:
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                     me->CastSpell(target, SPELL_ARCANE_ANNIHILATOR, true);
 
-                uiArcaneAnnihilatorTimer = urand(10*IN_MILLISECONDS, 20*IN_MILLISECONDS);
+                uiArcaneAnnihilatorTimer = urand(5*IN_MILLISECONDS, 7*IN_MILLISECONDS);
             } else uiArcaneAnnihilatorTimer -= Diff;
 
             DoMeleeAttackIfReady();
@@ -231,7 +231,7 @@ public:
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                     me->CastSpell(target, SPELL_ELECTRICAL_DISCHARGE, true);
 
-                uiElectricalDischargeTimer = urand(5*IN_MILLISECONDS, 7*IN_MILLISECONDS);
+                uiElectricalDischargeTimer = urand(10*IN_MILLISECONDS, 15*IN_MILLISECONDS);
             } else uiElectricalDischargeTimer -= Diff;
 
             DoMeleeAttackIfReady();
