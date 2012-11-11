@@ -178,7 +178,7 @@ public:
                 if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
                     me->CastSpell(target, SPELL_ARCANE_ANNIHILATOR, true);
 
-                uiArcaneAnnihilatorTimer = urand(5*IN_MILLISECONDS, 7*IN_MILLISECONDS);
+                uiArcaneAnnihilatorTimer = urand(10*IN_MILLISECONDS, 20*IN_MILLISECONDS);
             } else uiArcaneAnnihilatorTimer -= Diff;
 
             DoMeleeAttackIfReady();
@@ -204,6 +204,7 @@ public:
         }
 
         InstanceScript* pInstance;
+        uint32 uiElectricalDischargeTimer;
 
         void Reset()
         {
@@ -211,6 +212,9 @@ public:
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
+            
+            //Timer Definitions
+            uiElectricalDischargeTimer = 12*IN_MILLISECONDS;
         }
 
         void EnterCombat(Unit* /*pWho*/) { }
@@ -221,6 +225,14 @@ public:
         {
             if (!UpdateVictim())
                 return;
+            
+            if (uiElectricalDischargeTimer <= Diff)
+            {
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
+                    me->CastSpell(target, SPELL_ELECTRICAL_DISCHARGE, true);
+
+                uiElectricalDischargeTimer = urand(5*IN_MILLISECONDS, 7*IN_MILLISECONDS);
+            } else uiElectricalDischargeTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
