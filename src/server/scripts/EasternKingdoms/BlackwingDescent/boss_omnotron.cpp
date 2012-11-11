@@ -24,7 +24,19 @@
 
 enum eSpell
 {
-    SPELL_ARCANE_ANNIHILATOR = 79710
+    SPELL_ARCANE_ANNIHILATOR            = 79710,
+    SPELL_CHEMICAL_BOMB                 = 80157,
+    SPELL_POISON_SOAKED_SHELL           = 79835,
+    SPELL_GOLEM_INACTIVE                = 78726,
+    SPELL_ELECTRICAL_DISCHARGE          = 79879,
+    SPELL_LIGHTNING_CONDUCTOR           = 79888,
+    SPELL_UNSTABLE_SHIELD               = 79900,
+    SPELL_SHUTTING_DOWN                 = 78746,
+    SPELL_ACQUIRING_TARGET              = 79501,
+    SPELL_BARRIER                       = 79582,
+    SPELL_FLAMETHROWER                  = 79505,
+    SPELL_INCINERATION_SECURITY_MEASURE = 79023,
+    SPELL_POWER_GENERATOR               = 79624
 };
 
 class boss_toxitron : public CreatureScript
@@ -45,11 +57,17 @@ public:
         }
 
         InstanceScript* pInstance;
-
+        
+        //Timer Registration
+        uint32 uiChemicalBombTimer;
+        uint32 uiPoisonSoakedShellTimer;
+        
         void Reset()
         {
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
+            
+            uiChemicalBombTimer = 20*IN_MILLISECONDS; //Timer richtig?
         }
 
         void EnterCombat(Unit* /*pWho*/) {}
@@ -60,6 +78,14 @@ public:
         {
             if (!UpdateVictim())
                 return;
+            
+            if (uiChemicalBombTimer <= Diff)
+            {
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 150, true))
+                    me->CastSpell(target, SPELL_CHEMICAL_BOMB, true);
+
+                uiChemicalBombTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS); //Timer richtig?
+            } else uiChemicalBombTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
@@ -84,6 +110,11 @@ public:
         }
 
         InstanceScript* pInstance;
+        
+        //Timer Registration
+        uint32 uiAcquiringTargetTimer;
+        uint32 uiBarrierTimer;
+        uint32 uiFlamethrowerTimer;
 
         void Reset()
         {
@@ -126,6 +157,7 @@ public:
 
         InstanceScript* pInstance;
 
+        //Timer Registration
         uint32 uiArcaneAnnihilatorTimer;
 
         void Reset()
@@ -192,6 +224,11 @@ public:
         }
 
         InstanceScript* pInstance;
+        
+        //Timer Registration
+        uint32 uiElectricalDischargeTimer;
+        uint32 uiLightningConductorTimer;
+        uint32 uiUnstableShieldTimer;
 
         void Reset()
         {
@@ -199,6 +236,8 @@ public:
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
+            
+            uiElectricalDischargeTimer = 12*IN_MILLISECONDS;
         }
 
         void EnterCombat(Unit* /*pWho*/) { }
@@ -209,6 +248,14 @@ public:
         {
             if (!UpdateVictim())
                 return;
+            
+            if (uiElectricalDischargeTimer <= Diff)
+            {
+                if (Unit* target = SelectTarget(SELECT_TARGET_RANDOM, 0, 100, true))
+                    me->CastSpell(target, SPELL_ELECTRICAL_DISCHARGE, true);
+
+                uiElectricalDischargeTimer = urand(10*IN_MILLISECONDS, 15*IN_MILLISECONDS);
+            } else uiElectricalDischargeTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
