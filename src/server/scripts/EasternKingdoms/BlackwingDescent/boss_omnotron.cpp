@@ -39,6 +39,8 @@ enum eSpell
     SPELL_POWER_GENERATOR               = 79624
 };
 
+uint32 order = rand(1,4);
+
 class boss_toxitron : public CreatureScript
 {
 public:
@@ -58,12 +60,16 @@ public:
 
         InstanceScript* pInstance;
         
+        //Rotation
+        uint32 rotation;
+        
         //Timer Registration
         uint32 uiChemicalBombTimer;
         uint32 uiPoisonSoakedShellTimer;
         
         void Reset()
         {
+            rotation = order;
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
             
@@ -111,6 +117,9 @@ public:
 
         InstanceScript* pInstance;
         
+        //Rotation
+        uint32 rotation;
+        
         //Timer Registration
         uint32 uiAcquiringTargetTimer;
         uint32 uiBarrierTimer;
@@ -118,6 +127,8 @@ public:
 
         void Reset()
         {
+            rotation = order > 4 ? order-4 : order;
+            
             me->SetReactState(REACT_PASSIVE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
@@ -156,12 +167,18 @@ public:
         }
 
         InstanceScript* pInstance;
+        
+        //Rotation
+        uint32 rotation;
 
         //Timer Registration
         uint32 uiArcaneAnnihilatorTimer;
+        uint32 rotation;
 
         void Reset()
         {
+            rotation = order > 4 ? order-4 : order;
+            
             if (pInstance)
                 pInstance->SetData(DATA_OMNOTRON_DEFENSE_SYSTEM, NOT_STARTED);
 
@@ -225,6 +242,9 @@ public:
 
         InstanceScript* pInstance;
         
+        //Rotation
+        uint32 rotation;
+        
         //Timer Registration
         uint32 uiElectricalDischargeTimer;
         uint32 uiLightningConductorTimer;
@@ -232,6 +252,7 @@ public:
 
         void Reset()
         {
+            rotation = order > 4 ? order-4 : order;
             me->SetReactState(REACT_PASSIVE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
