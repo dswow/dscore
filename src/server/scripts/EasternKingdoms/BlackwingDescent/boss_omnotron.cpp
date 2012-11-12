@@ -70,6 +70,8 @@ public:
         void Reset()
         {
             rotation = order;
+            if (rotation != 1)
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
             
@@ -127,10 +129,12 @@ public:
 
         void Reset()
         {
-            rotation = order > 4 ? order-4 : order;
+            rotation = order+1 > 4 ? order-3 : order;
+            
+            if (rotation != 1)
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             
             me->SetReactState(REACT_PASSIVE);
-            me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
         }
@@ -176,7 +180,10 @@ public:
 
         void Reset()
         {
-            rotation = order > 4 ? order-4 : order;
+            rotation = order+2 > 4 ? order-2 : order;
+            
+            if (rotation != 1)
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             
             if (pInstance)
                 pInstance->SetData(DATA_OMNOTRON_DEFENSE_SYSTEM, NOT_STARTED);
@@ -251,7 +258,11 @@ public:
 
         void Reset()
         {
-            rotation = order > 4 ? order-4 : order;
+            rotation = order+3 > 4 ? order-1 : order;
+            
+            if (rotation != 1)
+                me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+            
             me->SetReactState(REACT_PASSIVE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
