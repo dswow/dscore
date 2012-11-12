@@ -62,16 +62,24 @@ public:
         
         //Rotation
         uint32 rotation;
+        uint32 rotationTimer;
+        bool rotationType;
         
         //Timer Registration
         uint32 uiChemicalBombTimer;
-        uint32 uiPoisonSoakedShellTimer;
+        uint32 uiPoisonSoakedShellTimer;   
         
         void Reset()
         {
             rotation = order;
+            rotationType = false;
+            rotationTimer = 45*rotation*IN_MILLISECONDS;
+            
             if (rotation != 1)
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+            else
+                rotationType = true;
+            
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
             me->ApplySpellImmune(0, IMMUNITY_MECHANIC, MECHANIC_GRIP, true);
             
@@ -94,6 +102,17 @@ public:
 
                 uiChemicalBombTimer = urand(15*IN_MILLISECONDS, 30*IN_MILLISECONDS); //Timer richtig?
             } else uiChemicalBombTimer -= Diff;
+            
+            if (rotationTimer <= Diff)
+            {
+                if (rotationType)
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                else
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                
+                rotationType = !rotationType;
+                rotationTimer = 45*IN_MILLISECONDS;
+            } else rotationTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
@@ -121,6 +140,8 @@ public:
         
         //Rotation
         uint32 rotation;
+        uint32 rotationTimer;
+        bool rotationType;
         
         //Timer Registration
         uint32 uiAcquiringTargetTimer;
@@ -130,9 +151,13 @@ public:
         void Reset()
         {
             rotation = order+1 > 4 ? order-3 : order;
+            rotationType = false;
+            rotationTimer = 45*rotation*IN_MILLISECONDS;
             
             if (rotation != 1)
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+            else
+                rotationType = true;
             
             me->SetReactState(REACT_PASSIVE);
             me->ApplySpellImmune(0, IMMUNITY_EFFECT, SPELL_EFFECT_KNOCK_BACK, true);
@@ -147,6 +172,17 @@ public:
         {
             if (!UpdateVictim())
                 return;
+            
+            if (rotationTimer <= Diff)
+            {
+                if (rotationType)
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                else
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                
+                rotationType = !rotationType;
+                rotationTimer = 45*IN_MILLISECONDS;
+            } else rotationTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
@@ -174,6 +210,8 @@ public:
         
         //Rotation
         uint32 rotation;
+        uint32 rotationTimer;
+        bool rotationType;
 
         //Timer Registration
         uint32 uiArcaneAnnihilatorTimer;
@@ -181,10 +219,14 @@ public:
         void Reset()
         {
             rotation = order+2 > 4 ? order-2 : order;
+            rotationType = false;
+            rotationTimer = 45*rotation*IN_MILLISECONDS;
             
             if (rotation != 1)
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
-            
+            else
+                rotationType = true;
+
             if (pInstance)
                 pInstance->SetData(DATA_OMNOTRON_DEFENSE_SYSTEM, NOT_STARTED);
 
@@ -223,6 +265,17 @@ public:
 
                 uiArcaneAnnihilatorTimer = urand(5*IN_MILLISECONDS, 7*IN_MILLISECONDS);
             } else uiArcaneAnnihilatorTimer -= Diff;
+            
+            if (rotationTimer <= Diff)
+            {
+                if (rotationType)
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                else
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                
+                rotationType = !rotationType;
+                rotationTimer = 45*IN_MILLISECONDS;
+            } else rotationTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
@@ -250,6 +303,8 @@ public:
         
         //Rotation
         uint32 rotation;
+        uint32 rotationTimer;
+        bool rotationType;
         
         //Timer Registration
         uint32 uiElectricalDischargeTimer;
@@ -260,8 +315,13 @@ public:
         {
             rotation = order+3 > 4 ? order-1 : order;
             
+            rotationType = false;
+            rotationTimer = 45*rotation*IN_MILLISECONDS;
+            
             if (rotation != 1)
                 me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+            else
+                rotationType = true;
             
             me->SetReactState(REACT_PASSIVE);
             me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
@@ -287,6 +347,17 @@ public:
 
                 uiElectricalDischargeTimer = urand(10*IN_MILLISECONDS, 15*IN_MILLISECONDS);
             } else uiElectricalDischargeTimer -= Diff;
+            
+            if (rotationTimer <= Diff)
+            {
+                if (rotationType)
+                    me->RemoveFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                else
+                    me->SetFlag(UNIT_FIELD_FLAGS, UNIT_FLAG_OOC_NOT_ATTACKABLE | UNIT_FLAG_NON_ATTACKABLE | UNIT_FLAG_PASSIVE);
+                
+                rotationType = !rotationType;
+                rotationTimer = 45*IN_MILLISECONDS;
+            } else rotationTimer -= Diff;
 
             DoMeleeAttackIfReady();
         }
