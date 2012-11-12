@@ -2079,6 +2079,16 @@
           <in>zutil.h</in>
         </df>
       </df>
+      <df name="nbproject">
+        <df name="private">
+          <in>Default.properties</in>
+          <in>configurations.xml</in>
+          <in>private.xml</in>
+        </df>
+        <in>Package-Default.bash</in>
+        <in>configurations.xml</in>
+        <in>project.xml</in>
+      </df>
       <df name="src">
         <df name="genrev">
         </df>
@@ -2686,6 +2696,9 @@
               <in>cs_reload.cpp</in>
               <in>cs_titles.cpp</in>
               <in>cs_wp.cpp</in>
+            </df>
+            <df name="Custom">
+              <in>cs_dscore.cpp</in>
             </df>
             <df name="EasternKingdoms">
               <df name="AlteracValley">
