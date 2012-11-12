@@ -173,7 +173,6 @@ public:
 
         //Timer Registration
         uint32 uiArcaneAnnihilatorTimer;
-        uint32 rotation;
 
         void Reset()
         {
