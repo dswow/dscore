@@ -1364,14 +1364,14 @@ void AddBattlegroundScripts ()
 }
 
 #ifdef SCRIPTS
-/* This is where custom scripts' loading functions should be declared. */
+void quests_quick_and_dirty();
 
 #endif
 
 void AddCustomScripts ()
 {
 #ifdef SCRIPTS
-    /* This is where custom scripts should be added. */
+    quests_quick_and_dirty();
 
 #endif
 }
