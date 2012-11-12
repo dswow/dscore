@@ -19,6 +19,13 @@
  * with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/* 
+    ScriptData
+    Name: Omnitron Boss Script
+    %Complete: 20
+    EndScriptData 
+ */
+
 #include "ScriptPCH.h"
 #include "blackwing_descent.h"
 
