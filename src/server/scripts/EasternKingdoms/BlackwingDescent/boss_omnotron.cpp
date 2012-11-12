@@ -39,7 +39,7 @@ enum eSpell
     SPELL_POWER_GENERATOR               = 79624
 };
 
-uint32 order = rand(1,4);
+uint32 order = urand(1,4);
 
 class boss_toxitron : public CreatureScript
 {
